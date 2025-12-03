@@ -1,0 +1,17 @@
+.Rproj.user
+.Rhistory
+.Rdata
+.httr-oauth
+.DS_Store
+.quarto
+*.Rproj
+/data_objects
+/data_objects_cv
+/data_objects_final
+/figures
+/figures_cv
+/initial-analysis-temp
+/qc
+/rw_v3
+/rw_v4
+
