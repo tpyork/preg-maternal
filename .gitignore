@@ -5,6 +5,7 @@
 .DS_Store
 .quarto
 *.Rproj
+*.log
 /data_objects
 /data_objects_cv
 /data_objects_final
