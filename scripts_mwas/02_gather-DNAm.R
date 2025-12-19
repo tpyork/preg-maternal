@@ -60,6 +60,20 @@ qc2 <- getQC(Mset2)
 detP <- detectionP(RGset2)  #identifies failed positions
 failed <- detP > 0.01
 
+
+p1 <- pData(RGset) %>% 
+  as.data.frame() %>% 
+  mutate(sid = str_sub(Sample_Name, 1, 4))
+length(unique(p1$sid))  #174
+
+p2 <- pData(RGset2) %>% 
+  as.data.frame() %>% 
+  mutate(sid = str_sub(Sample_Name, 1, 4))
+length(unique(p2$sid))
+
+
+
+
 # updated qc with subjects removed
 pdf("qc/qcReport_2.5.pdf")
 plotQC(qc2)                      #save this separate
@@ -116,7 +130,7 @@ sum(rowMeans(hp) > 0.01)  #number of failed positions in > 10% of samples; 5227
 exclude.hpv <- rownames(hp)[rowMeans(hp) > 0.01]
 keep.samples <- colMeans(hp) < 0.01
 rm(hp)
-# table(keep.samples)
+# table(keep.samples)  #N = 9
 
 
 
@@ -126,6 +140,14 @@ rm(hp)
 RGset3 <- subsetByLoci(rgSet       = RGset2[, keep.samples],
                        excludeLoci = c(exclude.xreactive, exclude.bds, exclude.hpv))
 save(RGset3, file = "data_objects/RGset_checkpoint3.Rdata")
+
+p3 <- pData(RGset3) %>% 
+  as.data.frame() %>% 
+  mutate(sid = str_sub(Sample_Name, 1, 4))
+length(unique(p3$sid))
+
+
+
 
 # CHECKPOINT 2 ----
 # load("data_objects/RGset_checkpoint2.Rdata")
@@ -379,8 +401,12 @@ covariates <- left_join(covariates, covariates.anc, by = "samples")
 
 # CHECKPOINT 4 ----
 save(RGset4, covariates, file = "data_objects/checkpoint4.Rdata")
+# load("data_objects/checkpoint4.Rdata")
 
-
+p4 <- pData(RGset4) %>% 
+  as.data.frame() %>% 
+  mutate(sid = str_sub(Sample_Name, 1, 4))
+length(unique(p4$sid))
 
 
 
